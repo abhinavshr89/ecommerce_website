@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 export const useCartStore = create((set, get) => ({
   cart: [],
   total: 0,
-  subtotal: 0,
+  
 
   getCartItems: async () => {
     try {
@@ -72,8 +72,8 @@ export const useCartStore = create((set, get) => ({
       (sum, item) => sum + item.price * item.quantity,
       0
     );
-    const total = subtotal;
+    
 
-    set({ subtotal, total });
+    set({ total:subtotal });
   },
 }));

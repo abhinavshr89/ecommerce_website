@@ -3,6 +3,7 @@ import { useCartStore } from "../stores/useCartStore";
 import { motion } from "framer-motion";
 import { ShoppingCart } from "lucide-react";
 import CartItem from "../components/CartItem";
+import OrderSummary from "../components/OrderSummary";
 
 const CartPage = () => {
 	const { cart } = useCartStore();
@@ -13,7 +14,7 @@ const CartPage = () => {
 		<>
 			<div className='py-8 md:py-16'>
 			<div className='mx-auto max-w-screen-xl px-4 2xl:px-0'>
-				<div className='mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8'>
+				<div className='mt-6 sm:mt-8 md:gap-6 lg:flex  lg:items-start xl:gap-8'>
 					<motion.div
 						className='mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl'
 						initial={{ opacity: 0, x: -20 }}
@@ -42,6 +43,9 @@ const CartPage = () => {
 							
 						</motion.div>
 					)}
+					{
+						cart.length > 0 && <OrderSummary />
+					}
 				</div>
 			</div>
 		</div>
