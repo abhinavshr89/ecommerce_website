@@ -36,41 +36,33 @@ const setCookies = (res, accessToken, refreshToken) => {
 };
 
 export const signup = async (req, res) => {
-  const { name, email, password } = req.body;
-  try {
-    const userExists = await User.findOne({ email });
+	const { email, password, name } = req.body;
+	try {
+		const userExists = await User.findOne({ email });
 
-    if (userExists) {
-      res.status(400).json({
-        message: "User already exists",
-      });
-    }
+		if (userExists) {
+			return res.status(400).json({ message: "User already exists" });
+		}
+		const user = await User.create({ name, email, password });
 
-    const user = await User.create({
-      name,
-      email,
-      password,
-    });
+		// authenticate
+		const { accessToken, refreshToken } = generateTokens(user._id);
+		await storeRefreshToken(user._id, refreshToken);
 
-    const { accessToken, refreshToken } = generateTokens(user._id);
-    await storeRefreshToken(user._id, refreshToken);
+		setCookies(res, accessToken, refreshToken);
 
-    setCookies(res, accessToken, refreshToken);
-
-    res.status(201).json({
-      id: user._id,
-      name: user.name,
-      email: user.email,
-      accessToken,
-      refreshToken,
-      role: user.role,
-    });
-  } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
-  }
+		res.status(201).json({
+			_id: user._id,
+			name: user.name,
+			email: user.email,
+			role: user.role,
+		});
+	} catch (error) {
+		console.log("Error in signup controller", error.message);
+		res.status(500).json({ message: error.message });
+	}
 };
+
 
 export const login = async (req, res) => {
   try {
@@ -159,4 +151,20 @@ export const refreshToken = async (req, res) => {
   }
 };
 
-// TODO : Implement get Profile Later
+
+// Here before entering this function the request is going through the 
+// protectRoute middleware which is checking if the user is authenticated
+// if the user is present it adds the user object to the request object
+// so we can access the user object from the request object inside this function 
+// and return the user object as a response
+export const getProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).select("-password");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}

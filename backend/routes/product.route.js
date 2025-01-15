@@ -6,7 +6,7 @@ import { protectRoute , adminRoute } from '../middleware/auth.middleware.js';
 
 const router = express.Router();
 
-router.get("/",protectRoute,adminRoute,getAllProducts);
+router.get("/",getAllProducts);
 router.post("/",protectRoute,adminRoute,createProduct);
 
 router.get("/featured",getFeaturedProducts);

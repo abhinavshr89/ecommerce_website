@@ -5,10 +5,16 @@ import connectDb from "./lib/connectDb.js"
 import cookieParser from 'cookie-parser';
 import productRoutes from "./routes/product.route.js"
 import cartRoutes from "./routes/cart.route.js"
+import cors from 'cors';
+const app = express()
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
 
 dotenv.config();
 
-const app = express()
+
 const PORT = process.env.PORT ;
 
 app.use(express.json());
@@ -17,7 +23,6 @@ app.use(cookieParser());
 app.use("/api/auth",authRoutes);
 app.use("/api/products",productRoutes);
 app.use("/api/cart",cartRoutes);
-
 
 app.listen(PORT, () => {
     connectDb();
