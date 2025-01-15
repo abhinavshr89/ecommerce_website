@@ -43,6 +43,7 @@ const useUserStore = create((set, get) => ({
 		try{
 			await axiosInstance.post("/auth/logout");
 			set({user:null,loading:false});
+			window.location.reload();
 		}catch(error){
 			set({loading:false});
 			toast.error(error.response.data.message);

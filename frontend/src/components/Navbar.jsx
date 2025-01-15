@@ -81,7 +81,7 @@ const Navbar = () => {
             </button>
           </div>
 
-          {cart.length > 0 && (
+          {(cart.length > 0 && user)&& (
             <Link
               to={"/cart"}
               className="relative lg:hidden group text-gray-300 hover:text-emerald-400 transition duration-300 
