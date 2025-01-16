@@ -1,5 +1,5 @@
 // Ensure the path and casing are correct
-import Product from "../models/product.model.js";
+import Product from "../Models/product.model.js";
 
 export const addToCart = async (req, res) => {
   try {
