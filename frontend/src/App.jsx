@@ -10,9 +10,10 @@ import { Navigate } from "react-router-dom";
 import SignUpPage from "./pages/SignUpPage";
 import CategoryPage from "./pages/CategoryPage";
 import ProductsPage from "./pages/ProductsPage";
-import CartsPage from "./pages/CartsPage";
+
+
 import { useCartStore } from "./stores/useCartStore";
-import CartPage from "./pages/CartsPage";
+import CartsPage from "./pages/CartsPage";
 
 export default function App() {
   const { user, checkAuth, checkingAuth } = useUserStore();
@@ -62,7 +63,7 @@ export default function App() {
         <Route path="/category/:category" element={<CategoryPage />} />
         <Route path="/products/:searchterm" element={<ProductsPage />} />
 
-        <Route path='/cart' element={user ? <CartPage /> : <Navigate to='/login' />} />
+        <Route path='/cart' element={user ? <CartsPage /> : <Navigate to='/login' />} />
       </Routes>
       <Toaster />
     </div>

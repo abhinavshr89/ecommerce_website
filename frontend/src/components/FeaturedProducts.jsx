@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import {ChevronLeft,ChevronRight, ShoppingCart} from 'lucide-react'
+import { useCartStore } from "../stores/useCartStore";
+
 
 
 const FeaturedProducts = ({featuredProducts}) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(4);
+    const {addToCart} = useCartStore();
+    
     useEffect(() => {
 		const handleResize = () => {
 			if (window.innerWidth < 640) setItemsPerPage(1);

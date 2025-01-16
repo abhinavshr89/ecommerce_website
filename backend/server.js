@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import productRoutes from "./routes/product.route.js"
 import cartRoutes from "./routes/cart.route.js"
 import cors from 'cors';
+import path from 'path';
 const app = express()
 app.use(cors({
   origin: 'http://localhost:5173',
