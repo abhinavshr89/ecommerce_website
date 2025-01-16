@@ -49,8 +49,8 @@ const Navbar = () => {
           </Link>
 
           <div className="flex items-center justify-center ">
-            <div className="mt-1 relative rounded-md shadow-sm">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <div className="mt-1 relative rounded-md shadow-sm flex">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center justify-center pointer-events-none">
                 <SearchIcon
                   className="h-5 w-5 text-gray-400"
                   aria-hidden="true"
@@ -63,32 +63,32 @@ const Navbar = () => {
                 onChange={(e) => setSearch(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSearch(e)}
                 required
-                className="block w-full px-3 py-2 pl-10 border border-gray-600 
+                className="block w-[80%] px-3 py-2 pl-10 border border-gray-600 
                    shadow-sm
                    placeholder-gray-400 focus:outline-none focus:ring-emerald-500 
                    focus:border-emerald-500 sm:text-sm text-black lg:w-[400px] rounded-l-md"
                 placeholder="Search..."
               />
+              <button
+                className="h-full mt-[1px] bg-emerald-300 px-3 py-2 rounded-r-md"
+                onClick={handleSearch}
+              >
+                <SearchIcon
+                  className="h-[110] text-gray-400"
+                  aria-hidden="true"
+                />
+              </button>
             </div>
-            <button
-              className="h-full max-sm:h-[90%] bg-emerald-300 px-3 py-2 mt-1 rounded-r-md"
-              onClick={handleSearch}
-            >
-              <SearchIcon
-                className="h-5 w-5 text-gray-400"
-                aria-hidden="true"
-              />
-            </button>
           </div>
 
           {(cart.length > 0 && user)&& (
             <Link
               to={"/cart"}
-              className="relative lg:hidden group text-gray-300 hover:text-emerald-400 transition duration-300 
+              className="relative lg:hidden group mt-3 text-gray-300 hover:text-emerald-400 transition duration-300 
             ease-in-out"
             >
               <ShoppingCart
-                className="inline-block mr-1 group-hover:text-emerald-400"
+                className="inline-block mr-1 group-hover:text-emerald-400 w-[30px] h-[30px]"
                 size={20}
               />
               <span className="hidden sm:inline">Cart</span>
@@ -101,7 +101,7 @@ const Navbar = () => {
             </Link>
           )}
 
-          <nav className="max-lg:hidden flex items-center gap-4 max-lg:hidden">
+          <nav className="max-lg:hidden flex items-center gap-4 ">
             <Link
               to={"/"}
               className="text-gray-300 hover:text-emerald-400 transition duration-300
@@ -175,7 +175,7 @@ const Navbar = () => {
           <Menu
             size={40}
             onClick={() => setActive(!active)}
-            className="lg:hidden"
+            className="lg:hidden mt-1"
           />
           <ResponsiveNavbar isActive={active} setActive={setActive} />
         </div>

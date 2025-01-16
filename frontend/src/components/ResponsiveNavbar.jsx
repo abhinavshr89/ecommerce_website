@@ -50,7 +50,7 @@ const ResponsiveNavbar = ({ isActive, setActive }) => {
             className="header cursor-pointer active:scale-95 active:text-emerald-500 transition-transform duration-100"
             onClick={handleLogout}
           >
-            <span className="hidden sm:inline ">Log Out</span>
+            <span className="">Log Out</span>
           </div>
           {user.role === 'admin' && (
             <Link to="/secret-dashboard" onClick={handleLinkClick}>
