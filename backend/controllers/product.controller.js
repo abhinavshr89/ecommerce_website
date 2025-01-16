@@ -1,4 +1,3 @@
-import { redis } from "../lib/redis.js";
 import Product from "../models/product.model.js";
 import cloudinary from "../lib/cloudinary.js";
 
@@ -15,20 +14,11 @@ export const getAllProducts = async (req, res) => {
 
 export const getFeaturedProducts = async (req, res) => {
   try {
-    let featuredProducts = await redis.get("featured_products");
-    if (featuredProducts) {
-      return res.json(JSON.parse(featuredProducts));
-    }
-
-    // if not present in the redis then fetch from the database
-    // lean() -> will return plain javascript object instead of mongoose document
-    // which is good for performance
-    featuredProducts = await Product.find({ isFeatured: true }).lean();
+    const featuredProducts = await Product.find({ isFeatured: true }).lean();
     if (!featuredProducts) {
       return res.status(404).json({ message: "Featured Products not found" });
     }
 
-    await redis.set("featured_products", JSON.stringify(featuredProducts));
     res.json(featuredProducts);
   } catch (error) {
     console.log("Error in getFeaturedProducts", error);
@@ -123,7 +113,6 @@ export const toggleFeaturedProduct = async (req, res) => {
 
     product.isFeatured = !product.isFeatured;
     const updatedProduct = await product.save();
-    await updatedFeatureProductsCache();
 
     res.json(updatedProduct);
   } catch (error) {
@@ -131,12 +120,3 @@ export const toggleFeaturedProduct = async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 };
-
-async function updatedFeatureProductsCache() {
-  try {
-    const featuredProducts = await Product.find({ isFeatured: true }).lean();
-    await redis.set("featured_products", JSON.stringify(featuredProducts));
-  } catch (error) {
-    console.log("Error in updatedFeatureProductsCache", error);
-  }
-}
