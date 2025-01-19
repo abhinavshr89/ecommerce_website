@@ -26,17 +26,16 @@ const OrderSummary = () => {
         </div>
       </div>
 
-     
       <div className="space-y-2">
-        
-
-        <motion.button
-          className="flex w-full items-center justify-center rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-300"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Proceed to Checkout
-        </motion.button>
+        <Link to="/checkout">
+          <motion.button
+            className="flex w-full items-center justify-center rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-300"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Proceed to Checkout
+          </motion.button>
+        </Link>
 
         <div className="flex items-center justify-center gap-2">
           <span className="text-sm font-normal text-gray-400">or</span>

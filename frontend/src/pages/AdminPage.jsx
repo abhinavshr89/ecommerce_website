@@ -1,19 +1,22 @@
-import { PlusCircle, ShoppingBasket } from "lucide-react";
+import { PlusCircle, ShoppingBasket,ListOrdered, List } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import CreateProductForm from "../components/CreateProductForm";
 import ProductsList from "../components/ProductsList";
 import { useProductStore } from "../stores/useProductStore";
+import Orders from "../components/Orders";
 
 
 const tabs = [
   { id: "create", label: "Create Product", icon: PlusCircle },
   { id: "products", label: "Products", icon: ShoppingBasket },
+  { id: "orders", label: "Orders", icon: ListOrdered },
 ];
 const AdminPage = () => {
   const [activeTab, setActiveTab] = useState("create");
 
   const {fetchAllProducts,products} = useProductStore();
+
 
 
   useEffect(() => {
@@ -53,6 +56,8 @@ const AdminPage = () => {
 
         {activeTab === "create" && <CreateProductForm />}
 				{activeTab === "products" && <ProductsList  />}
+				{activeTab === "orders" && <Orders />}
+				
     </div>
   );
 };

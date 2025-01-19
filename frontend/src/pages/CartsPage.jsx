@@ -7,7 +7,7 @@ import OrderSummary from "../components/OrderSummary";
 
 const CartPage = () => {
 	const { cart } = useCartStore();
-    console.log(cart);
+    
     
 
 	return (
