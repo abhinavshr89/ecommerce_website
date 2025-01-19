@@ -43,7 +43,7 @@ const Navbar = () => {
             className="text-2xl font-bold text-emerald-400 items-center space-x-2 flex"
           >
             <div className="flex gap-2 items-center justify-center">
-              <Earth className="" />
+              <Earth className="max-sm:hidden" />
               <h1 className="max-sm:hidden"> ShopSphere</h1>
             </div>
           </Link>
