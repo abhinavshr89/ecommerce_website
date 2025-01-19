@@ -25,16 +25,22 @@ const ResponsiveNavbar = ({ isActive, setActive }) => {
         onClick={() => setActive(!isActive)}
         className="active:scale-95 ml-auto active:text-emerald-500 transition-transform duration-100"
       />
+
+      {
+        user && 
       <div className="header flex justify-between items-center">
         <Link to="/profile" onClick={handleLinkClick} className="flex-grow">
           <div className="active:scale-95  w-full justify-between active:text-emerald-500 transition-transform duration-100 flex gap-4">
             <h1>My Profile</h1>
           </div>
         </Link>
+
+       
         <div className="w-10 h-10 rounded-full overflow-hidden">
-          <img src={user.profilePicture} />
+          <img src={user?.profilePicture} />
         </div>
       </div>
+      }
       <div className="header flex justify-between items-center">
         <Link to="/" onClick={handleLinkClick}>
           <h1 className="active:scale-95 active:text-emerald-500 transition-transform duration-100">

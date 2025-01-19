@@ -152,11 +152,14 @@ const Navbar = () => {
                   <LogOut size={18} />
                   <span className="hidden sm:inline ml-2">Log Out</span>
                 </button>
+                {
+                  user && 
                 <Link to="/profile">
                 <div className="w-10 h-10  rounded-full overflow-hidden">
-                  <img src={user.profilePicture} />
+                  <img src={user?.profilePicture} />
                 </div>
                 </Link>
+                }
              
               </>
             ) : (
