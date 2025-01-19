@@ -20,4 +20,13 @@ export const useOrderStore = create((set, get) => ({
       toast.error(error.response.data.message || "An error occurred");
     }
   },
+  deleteOrder: async(id)=>{
+    try {
+      await axios.delete(`/orders/${id}`);
+      toast.success("Order deleted successfully");
+      get().getOrders();
+    } catch (error) {
+      toast.error(error.response.data.message || "An error occurred");
+    }
+  }
 }));
