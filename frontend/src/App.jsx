@@ -11,6 +11,7 @@ import SignUpPage from "./pages/SignUpPage";
 import CategoryPage from "./pages/CategoryPage";
 import ProductsPage from "./pages/ProductsPage";
 import CheckoutPage from "./pages/CheckoutPage";
+import ProfilePage from "./pages/ProfilePage";
 
 
 import { useCartStore } from "./stores/useCartStore";
@@ -66,6 +67,7 @@ export default function App() {
 
         <Route path='/cart' element={user ? <CartsPage /> : <Navigate to='/login' />} />
         <Route path='/checkout' element={user ? <CheckoutPage /> : <Navigate to='/login' />} />
+        <Route path='/profile' element={user ? <ProfilePage /> : <Navigate to='/login' />} />
       </Routes>
       <Toaster />
     </div>

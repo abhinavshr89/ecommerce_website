@@ -61,7 +61,18 @@ const useUserStore = create((set, get) => ({
 			console.log(error.response.data.message);
 		}
 	}
-	// TODO ; Implement the axios Interceptor for refreshing the token
+	,
+	updateProfile: async (userData) => {
+		set({ loading: true });
+		try {
+			const res = await axiosInstance.put("/auth/update-profile", userData);
+			set({ user: res.data.user, loading: false });
+			toast.success("Profile updated successfully");
+		} catch (error) {
+			set({ loading: false });
+			toast.error(error.response.data.message);
+		}
+	}
 	
 }));
 

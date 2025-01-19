@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema(
 			required: [true, "Password is required"],
 			minlength: [6, "Password must be at least 6 characters long"],
 		},
+		profilePicture:{
+			type: String,
+			default: "https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/default-avatar-profile-picture-male-icon.png",
+		},
 		cartItems: [
 			{
 				quantity: {

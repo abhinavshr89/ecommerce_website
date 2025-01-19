@@ -33,6 +33,8 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      'react/prop-types': 'off', // Disable React PropTypes rule
+      'no-unused-vars': ['warn', { vars: 'all', args: 'none', ignoreRestSiblings: true }], // Ignore unnecessary imports
     },
   },
 ]

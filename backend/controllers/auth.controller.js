@@ -1,5 +1,6 @@
 import User from "../Models/user.model.js";
 import jwt from "jsonwebtoken";
+import cloudinary from "../lib/cloudinary.js";
 
 const generateToken = (userId) => {
   return jwt.sign({ userId }, process.env.TOKEN_SECRET, {
@@ -74,7 +75,7 @@ export const login = async (req, res) => {
   }
 };
 
-export const logout = async (req, res) => {
+export const logout = async (res) => {
   try {
     res.clearCookie("token");
     res.status(200).json({
@@ -104,10 +105,10 @@ export const refreshToken = async (req, res) => {
   }
 };
 
-// Here before entering this function the request is going through the 
+// Here before entering this function the request is going through the
 // protectRoute middleware which is checking if the user is authenticated
 // if the user is present it adds the user object to the request object
-// so we can access the user object from the request object inside this function 
+// so we can access the user object from the request object inside this function
 // and return the user object as a response
 export const getProfile = async (req, res) => {
   try {
@@ -116,6 +117,46 @@ export const getProfile = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const updateProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const { name, profileImage } = req.body;
+    
+    
+
+    let cloudinaryResponse = null;
+    if (profileImage) {
+      cloudinaryResponse = await cloudinary.uploader.upload(profileImage, {
+        folder: "profiles",
+      });
+      user.profilePicture = cloudinaryResponse.secure_url;
+    } else {
+      user.profilePicture = user.profilePicture;
+    }
+
+    if (name!==user.name) {
+      user.name = name;
+    }
+
+    await user.save();
+
+    res.status(200).json({
+      message: "Profile updated successfully",
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        profilePicture: user.profilePicture,
+      },
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

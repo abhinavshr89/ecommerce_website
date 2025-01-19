@@ -43,7 +43,7 @@ const Navbar = () => {
             className="text-2xl font-bold text-emerald-400 items-center space-x-2 flex"
           >
             <div className="flex gap-2 items-center justify-center">
-              <Earth className="max-sm:hidden" />
+              <Earth className="" />
               <h1 className="max-sm:hidden"> ShopSphere</h1>
             </div>
           </Link>
@@ -81,7 +81,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          {(cart.length > 0 && user)&& (
+          {cart.length > 0 && user && (
             <Link
               to={"/cart"}
               className="relative lg:hidden group mt-3 text-gray-300 hover:text-emerald-400 transition duration-300 
@@ -101,7 +101,7 @@ const Navbar = () => {
             </Link>
           )}
 
-          <nav className="max-lg:hidden flex items-center gap-4 ">
+          <nav className="max-xl:hidden flex items-center gap-4 ">
             <Link
               to={"/"}
               className="text-gray-300 hover:text-emerald-400 transition duration-300
@@ -143,14 +143,22 @@ const Navbar = () => {
             )}
 
             {user ? (
-              <button
-                className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 
+              <>
+                <button
+                  className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 
             rounded-md flex items-center transition duration-300 ease-in-out"
-                onClick={handleClick}
-              >
-                <LogOut size={18} />
-                <span className="hidden sm:inline ml-2">Log Out</span>
-              </button>
+                  onClick={handleClick}
+                >
+                  <LogOut size={18} />
+                  <span className="hidden sm:inline ml-2">Log Out</span>
+                </button>
+                <Link to="/profile">
+                <div className="w-10 h-10  rounded-full overflow-hidden">
+                  <img src={user.profilePicture} />
+                </div>
+                </Link>
+             
+              </>
             ) : (
               <>
                 <Link
