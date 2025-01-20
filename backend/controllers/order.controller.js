@@ -42,3 +42,14 @@ export const deleteOrder = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+// find the order based on the user id
+
+export const getOrderByUser = async (req, res) => {
+    try {
+        const orders = await Order.find({ user: req.user._id }).populate('products.product');
+        res.status(200).json(orders);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};

@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 
 export const useOrderStore = create((set, get) => ({
   orders: [],
+  userOrders:[],
   getOrders: async () => {
     try {
       const res = await axios.get("/orders");
@@ -25,6 +26,18 @@ export const useOrderStore = create((set, get) => ({
       await axios.delete(`/orders/${id}`);
       toast.success("Order deleted successfully");
       get().getOrders();
+    } catch (error) {
+      toast.error(error.response.data.message || "An error occurred");
+    }
+  },
+  getOrderByUser: async()=>{
+    try {
+      const res = await axios.get("/orders/user-order");
+      
+      
+      set({ userOrders: res.data });
+      
+      
     } catch (error) {
       toast.error(error.response.data.message || "An error occurred");
     }
