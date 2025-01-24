@@ -8,7 +8,7 @@ const Orders = () => {
     getOrders();
   }, [getOrders]);
 
-  console.log(orders);
+  
   if (orders.length === 0) {
     return (
       <div className="flex justify-center  h-screen">

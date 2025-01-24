@@ -22,7 +22,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     getOrderByUser();
-    console.log(userOrders);
+    
     
   }, [getOrderByUser]);
 

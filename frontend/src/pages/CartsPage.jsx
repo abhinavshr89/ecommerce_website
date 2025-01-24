@@ -6,7 +6,9 @@ import CartItem from "../components/CartItem";
 import OrderSummary from "../components/OrderSummary";
 
 const CartPage = () => {
-	const { cart } = useCartStore();
+	let { cart   } = useCartStore();
+	
+
     
     
 
@@ -47,6 +49,7 @@ const CartPage = () => {
 						cart.length > 0 && <OrderSummary />
 					}
 				</div>
+				
 			</div>
 		</div>
 		</>

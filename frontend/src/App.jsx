@@ -13,23 +13,28 @@ import ProductsPage from "./pages/ProductsPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import ProfilePage from "./pages/ProfilePage";
 
-
 import { useCartStore } from "./stores/useCartStore";
 import CartsPage from "./pages/CartsPage";
 
 export default function App() {
   const { user, checkAuth, checkingAuth } = useUserStore();
-  const { getCartItems } = useCartStore();
+  const { getCartItems, clearCart, setLocalCart, syncCart } = useCartStore();
 
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
 
   useEffect(() => {
-    if (!user) return;
-
-    getCartItems();
-  }, [getCartItems, user]);
+    if (!user) {
+      setLocalCart();
+      return;
+    }
+    (async () => {
+      await syncCart();
+      clearCart();
+      getCartItems();
+    })();
+  }, [getCartItems, clearCart, user, setLocalCart, syncCart]);
 
   if (checkingAuth) {
     return (
@@ -65,9 +70,15 @@ export default function App() {
         <Route path="/category/:category" element={<CategoryPage />} />
         <Route path="/products/:searchterm" element={<ProductsPage />} />
 
-        <Route path='/cart' element={user ? <CartsPage /> : <Navigate to='/login' />} />
-        <Route path='/checkout' element={user ? <CheckoutPage /> : <Navigate to='/login' />} />
-        <Route path='/profile' element={user ? <ProfilePage /> : <Navigate to='/login' />} />
+        <Route path="/cart" element={<CartsPage />} />
+        <Route
+          path="/checkout"
+          element={user ? <CheckoutPage /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/profile"
+          element={user ? <ProfilePage /> : <Navigate to="/login" />}
+        />
       </Routes>
       <Toaster />
     </div>
