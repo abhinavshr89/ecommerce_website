@@ -125,7 +125,7 @@ export const useCartStore = create((set, get) => ({
           }
         }
       }
-      set({ cart: [] }); // Clear local cart after syncing
+      set({ cart: [] }); 
     } catch (error) {
       toast.error(error.response.data.message || "An error occurred");
     }
