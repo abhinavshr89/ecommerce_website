@@ -9,6 +9,8 @@ const FeaturedProducts = ({featuredProducts}) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(4);
     const {addToCart} = useCartStore();
+    const {user} = useUserStore();
+    const {addToGuestCart} = useCartStore();
     
     useEffect(() => {
 		const handleResize = () => {

@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 
 export const useCartStore = create((set, get) => ({
   cart: [],
-  guestCart: [],
+ 
   total: 0,
 
   getCartItems: async () => {
@@ -18,6 +18,7 @@ export const useCartStore = create((set, get) => ({
     }
   },
   clearCart: async () => {
+    localStorage.removeItem("cart");
     set({ cart: [], total: 0, subtotal: 0 });
   },
   addToCart: async (product) => {
