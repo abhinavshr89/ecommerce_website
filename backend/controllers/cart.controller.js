@@ -3,14 +3,14 @@ import Product from "../Models/product.model.js";
 
 export const addToCart = async (req, res) => {
   try {
-    const { productId } = req.body;
+    const { productId , quantity = 1 } = req.body;
     const user = req.user;
 
     const existingItem = user.cartItems.find((item) => item.id === productId);
     // item._id = new ObjectId('678354da33be94f0fcaa97f0')
     // item.id = '678354da33be94f0fcaa97f0'  -> directly converts it to string
     if (existingItem) {
-      existingItem.quantity += 1;
+      existingItem.quantity += quantity;
     } else {
       user.cartItems.push(productId);
     }

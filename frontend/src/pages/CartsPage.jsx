@@ -23,11 +23,11 @@ const CartPage = () => {
 						animate={{ opacity: 1, x: 0 }}
 						transition={{ duration: 0.5, delay: 0.2 }}
 					>
-						{cart.length === 0 ? (
+						{cart?.length === 0 ? (
 							<EmptyCartUI />
 						) : (
 							<div className='space-y-6'>
-								{cart.map((item) => (
+								{cart?.map((item) => (
 									<CartItem key={item._id} item={item} />
 								))}
 							</div>
@@ -35,7 +35,7 @@ const CartPage = () => {
 						
 					</motion.div>
 
-					{cart.length > 0 && (
+					{cart?.length > 0 && (
 						<motion.div
 							className='mx-auto mt-6 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full'
 							initial={{ opacity: 0, x: 20 }}
@@ -46,7 +46,7 @@ const CartPage = () => {
 						</motion.div>
 					)}
 					{
-						cart.length > 0 && <OrderSummary />
+						cart?.length > 0 && <OrderSummary />
 					}
 				</div>
 				
