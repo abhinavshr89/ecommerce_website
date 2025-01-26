@@ -124,6 +124,7 @@ export const useCartStore = create((set, get) => ({
             await axios.post("/cart", { productId: _id });
           }
         }
+        localStorage.removeItem("cart"); // Clear local storage after syncing
       }
       set({ cart: [] }); 
     } catch (error) {
