@@ -8,8 +8,7 @@ import useUserStore from "../stores/useUserStore";
 const FeaturedProducts = ({featuredProducts}) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(4);
-    const {addToCart , addToGuestCart } = useCartStore();
-    const {user} = useUserStore()
+    const {addToCart} = useCartStore();
     
     useEffect(() => {
 		const handleResize = () => {
