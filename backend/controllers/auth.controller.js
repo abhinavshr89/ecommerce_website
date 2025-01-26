@@ -88,23 +88,6 @@ export const logout = async (req, res) => {
   }
 };
 
-export const refreshToken = async (req, res) => {
-  try {
-    const token = req.cookies.token;
-    if (!token) {
-      return res.status(403).json({ message: "User not authenticated" });
-    }
-    const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
-    const newToken = generateToken(decoded.userId);
-    setCookie(res, newToken);
-    res.status(200).json({ token: newToken });
-  } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
-  }
-};
-
 // Here before entering this function the request is going through the
 // protectRoute middleware which is checking if the user is authenticated
 // if the user is present it adds the user object to the request object
